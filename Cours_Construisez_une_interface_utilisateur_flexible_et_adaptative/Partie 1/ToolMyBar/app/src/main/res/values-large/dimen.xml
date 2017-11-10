@@ -1,0 +1,9 @@
+<resources>
+    <!-- TextViews -->
+    <dimen name="size_title">60sp</dimen>
+    <dimen name="padding_title">100dip</dimen>
+    <dimen name="padding_title_land">20dip</dimen>
+    <!-- Images -->
+    <dimen name="size_image_height">350dip</dimen>
+    <dimen name="size_image_width">@dimen/size_image_height</dimen>
+</resources>

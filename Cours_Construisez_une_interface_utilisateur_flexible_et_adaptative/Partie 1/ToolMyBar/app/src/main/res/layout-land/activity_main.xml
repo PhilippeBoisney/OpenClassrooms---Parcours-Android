@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context="com.openclassrooms.toolmybar.MainActivity">
 
     <!-- Block 1 prenant la première moitié de l'écran (propriété layout_weight) -->
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="OpenClassrooms, c'est vraiment le top du top !"
             android:textSize="@dimen/size_title"
-            android:padding="@dimen/padding_title"
+            android:padding="@dimen/padding_title_land"
             android:textAlignment="center"
             android:textColor="#FFFFFF"/>
 
