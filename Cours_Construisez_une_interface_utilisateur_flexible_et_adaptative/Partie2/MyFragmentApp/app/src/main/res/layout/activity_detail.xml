@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frame_layout_detail"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:name="com.openclassrooms.myfragmentapp.Controllers.Fragments.DetailFragment"/>
+    android:layout_height="match_parent"/>
