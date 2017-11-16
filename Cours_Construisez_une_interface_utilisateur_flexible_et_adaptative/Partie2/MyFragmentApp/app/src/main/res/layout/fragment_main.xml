@@ -1,19 +1,29 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.openclassrooms.myfragmentapp.Controllers.Fragments.MainFragment"
-    android:gravity="center"
-    android:background="#D8DCF0">
+    android:orientation="vertical"
+    android:gravity="center">
 
     <Button
-        android:id="@+id/fragment_main_button"
-        android:layout_width="wrap_content"
+        android:id="@+id/fragment_main_button_happy"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SHOW ME DETAILS !"
-        android:background="#00000000"
-        android:textColor="#FFF"
-        android:textSize="30sp"/>
+        android:text="Show Happy Detail"
+        android:tag="10"/>
+
+    <Button
+        android:id="@+id/fragment_main_button_sad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Sad Detail"
+        android:tag="20"/>
+
+    <Button
+        android:id="@+id/fragment_main_button_horrible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Horrible Detail"
+        android:tag="30"/>
 
 </LinearLayout>
