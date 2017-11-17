@@ -1,5 +1,6 @@
 package com.openclassrooms.myamazingviewpager.Controllers.Activities;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,14 +17,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Configure ViewPager
-        this.configureViewPager();
+        this.configureViewPagerAndTabs();
     }
 
-    private void configureViewPager(){
+    private void configureViewPagerAndTabs(){
         //Get ViewPager from layout
         ViewPager pager = (ViewPager)findViewById(R.id.activity_main_viewpager);
         //Set Adapter PageAdapter and glue it together
-        pager.setAdapter(new PageAdapter(getSupportFragmentManager(), getResources().getIntArray(R.array.colorPagesViewPager)) {
-        });
+        pager.setAdapter(new PageAdapter(getSupportFragmentManager()));
+
+        //Get TabLayout from layout
+        TabLayout tabs= (TabLayout)findViewById(R.id.activity_main_tabs);
+        //Glue TabLayout and ViewPager together
+        tabs.setupWithViewPager(pager);
+        //Design purpose. Tabs have the same width
+        tabs.setTabMode(TabLayout.MODE_FIXED);
     }
 }
