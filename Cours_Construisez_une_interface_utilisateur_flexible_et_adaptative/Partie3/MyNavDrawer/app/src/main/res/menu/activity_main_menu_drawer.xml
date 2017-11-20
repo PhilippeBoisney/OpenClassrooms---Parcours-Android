@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/activity_main_drawer_news"
+            android:icon="@drawable/ic_dashboard_white_24dp"
+            android:title="Fil d'actualité" />
+    </group>
+
+    <item android:title="Configuration">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/activity_main_drawer_profile"
+                    android:icon="@drawable/ic_account_box_white_24dp"
+                    android:title="Profil" />
+                <item
+                    android:id="@+id/activity_main_drawer_settings"
+                    android:icon="@drawable/ic_settings_applications_white_24dp"
+                    android:title="Paramètres" />
+            </group>
+        </menu>
+    </item>
+
+</menu>
