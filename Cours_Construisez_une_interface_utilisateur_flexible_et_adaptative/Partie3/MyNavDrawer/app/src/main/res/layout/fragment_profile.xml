@@ -1,0 +1,22 @@
+<LinearLayout
+    android:id="@+id/fragment_profile_rootview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.openclassrooms.mynavdrawer.Controllers.Fragments.ProfileFragment"
+    android:gravity="center"
+    android:background="#BED4D6">
+
+    <TextView
+        android:id="@+id/fragment_page_profile_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:textAlignment="center"
+        android:text="... et dans ce fragment afficher le profil de l'utilisateur, hein ?"/>
+
+</LinearLayout>

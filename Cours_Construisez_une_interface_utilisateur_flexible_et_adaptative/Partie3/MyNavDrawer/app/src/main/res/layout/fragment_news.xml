@@ -1,0 +1,22 @@
+<LinearLayout
+    android:id="@+id/fragment_news_rootview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.openclassrooms.mynavdrawer.Controllers.Fragments.NewsFragment"
+    android:gravity="center"
+    android:background="#EDD9CF">
+
+    <TextView
+        android:id="@+id/fragment_page_news_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:textAlignment="center"
+        android:text="Nous pourrions afficher un fil d'actualité ici non ?"/>
+
+</LinearLayout>
