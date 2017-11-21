@@ -10,42 +10,32 @@ import android.widget.TextView;
 
 import com.openclassrooms.myfragmentapp.R;
 
-public class DetailFragment extends Fragment {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import icepick.Icepick;
+import icepick.State;
 
-    // Declare TextView
-    private TextView textView;
-    //Declare a buttonTag tracking
-    private int buttonTag;
-    //Create static variable to identify key in Bundle
-    private static final String KEY_BUTTONTAG = "com.openclassrooms.myfragmentapp.Controllers.Fragments.DetailFragment.KEY_BUTTONTAG";
+public class DetailFragment extends BaseFragment {
 
+    @BindView(R.id.fragment_detail_text_view) TextView textView;
+    @State int buttonTag;
 
-    public DetailFragment() { }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_detail, container, false);
-        //Get textView from layout (don't forget to create ID in fragment_detail.xml)
-        this.textView = (TextView) view.findViewById(R.id.fragment_detail_text_view);
-        return(view);
-    }
+    // --------------
+    // BASE METHODS
+    // --------------
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        //Restore last buttonTag if possible
-        if (savedInstanceState != null) {
-            int buttonTagRestored = savedInstanceState.getInt(KEY_BUTTONTAG, 0);
-            //Update TextView
-            this.updateTextView(buttonTagRestored);
-        }
-    }
+    protected BaseFragment newInstance() { return new DetailFragment(); }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        //Save buttonTag in Bundle when fragment is destroyed
-        outState.putInt(KEY_BUTTONTAG, buttonTag);
+    protected int getFragmentLayout() { return R.layout.fragment_detail; }
+
+    @Override
+    protected void configureDesign() { }
+
+    @Override
+    protected void updateDesign() {
+        this.updateTextView(this.buttonTag);
     }
 
     // --------------
@@ -72,5 +62,4 @@ public class DetailFragment extends Fragment {
                 break;
         }
     }
-
 }

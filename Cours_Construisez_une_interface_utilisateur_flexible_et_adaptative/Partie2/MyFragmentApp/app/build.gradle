@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.openclassrooms.myfragmentapp"
         minSdkVersion 17
@@ -27,5 +27,17 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     compile 'com.android.support:support-v4:25.3.1'
+
+    //ICE PICK (Bundle)
+    //OLD version of Gradle : compile 'frankiesardo:icepick:3.1.0'
+    //OLD version of Gradle : provided 'frankiesardo:icepick-processor:3.1.0'
+    api 'frankiesardo:icepick:3.2.0'
+    compileOnly 'frankiesardo:icepick-processor:3.2.0'
+    annotationProcessor 'frankiesardo:icepick-processor:3.2.0'
+
+    //ButterKnife (Views binding)
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
     testCompile 'junit:junit:4.12'
 }
