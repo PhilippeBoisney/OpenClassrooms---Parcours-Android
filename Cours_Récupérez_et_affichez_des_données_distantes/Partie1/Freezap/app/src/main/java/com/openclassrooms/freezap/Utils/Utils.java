@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class Utils {
 
-    public static Long executeLongActionDuring5seconds(){
+    public static Long executeLongActionDuring7seconds(){
 
         Log.e("TAG", "Long action is starting...");
         Long endTime = System.currentTimeMillis() + 7000;
