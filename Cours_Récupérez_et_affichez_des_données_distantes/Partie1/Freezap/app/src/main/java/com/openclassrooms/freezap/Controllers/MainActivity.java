@@ -1,6 +1,13 @@
 package com.openclassrooms.freezap.Controllers;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -11,9 +18,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.openclassrooms.freezap.R;
+import com.openclassrooms.freezap.Utils.MyAlarmReceiver;
 import com.openclassrooms.freezap.Utils.MyAsyncTask;
 import com.openclassrooms.freezap.Utils.MyAsyncTaskLoader;
 import com.openclassrooms.freezap.Utils.MyHandlerThread;
+import com.openclassrooms.freezap.Utils.SyncJobService;
 import com.openclassrooms.freezap.Utils.Utils;
 
 public class MainActivity extends AppCompatActivity implements MyAsyncTask.Listeners, LoaderManager.LoaderCallbacks<Long> {
@@ -21,9 +30,12 @@ public class MainActivity extends AppCompatActivity implements MyAsyncTask.Liste
     //FOR DESIGN
     private ProgressBar progressBar;
     private static int TASK_ID = 100;
+    private static int JOBSCHEDULER_ID = 200;
 
     //FOR DATA
     private MyHandlerThread handlerThread;
+    // Creating an intent to execute our broadcast
+    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +50,9 @@ public class MainActivity extends AppCompatActivity implements MyAsyncTask.Liste
 
         //Try to resume possible loading AsyncTask
         this.resumeAsyncTaskLoaderIfPossible();
+
+        //Configuring The AlarmManager
+        this.configureAlarmManager();
     }
 
     @Override
@@ -59,11 +74,14 @@ public class MainActivity extends AppCompatActivity implements MyAsyncTask.Liste
             case 20: // CASE USER CLICKED ON BUTTON "EXECUTE ACTION IN BACKGROUND"
                 this.startHandlerThread();
                 break;
-            case 30:
+            case 30: // CASE USER CLICKED ON BUTTON "START ALARM"
+                this.startAlarm();
                 break;
-            case 40:
+            case 40: // CASE USER CLICKED ON BUTTON "STOP ALARM"
+                this.stopAlarm();
                 break;
-            case 50:
+            case 50: // CASE USER CLICKED ON BUTTON "EXECUTE JOB SCHEDULER"
+                this.startJobScheduler();
                 break;
             case 60: // CASE USER CLICKED ON BUTTON "EXECUTE ASYNCTASK"
                 this.startAsyncTask();
@@ -81,6 +99,12 @@ public class MainActivity extends AppCompatActivity implements MyAsyncTask.Liste
     // Configuring the HandlerThread
     private void configureHandlerThread(){
         handlerThread = new MyHandlerThread("MyAwesomeHanderThread", this.progressBar);
+    }
+
+    // 2 - Configuring the AlarmManager
+    private void configureAlarmManager(){
+        Intent alarmIntent = new Intent(MainActivity.this, MyAlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     // -------------------------------------------
@@ -141,6 +165,41 @@ public class MainActivity extends AppCompatActivity implements MyAsyncTask.Liste
 
     @Override
     public void onLoaderReset(Loader<Long> loader) { }
+
+    // ---------------------------------------------
+    // SCHEDULE TASK (AlarmManager & JobScheduler)
+    // ---------------------------------------------
+
+    // 3 - Start Alarm
+    private void startAlarm() {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,0, AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+        Toast.makeText(this, "Alarm set !", Toast.LENGTH_SHORT).show();
+    }
+
+    // 4 - Stop Alarm
+    private void stopAlarm() {
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        manager.cancel(pendingIntent);
+        Toast.makeText(this, "Alarm Canceled !", Toast.LENGTH_SHORT).show();
+    }
+
+    // Start JobScheduler
+    private void startJobScheduler(){
+        JobInfo job = new JobInfo.Builder(JOBSCHEDULER_ID, new ComponentName(this, SyncJobService.class))
+                .setRequiresCharging(true) // The job will be executed if charging
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY) // The job will be executed if any network is available
+                .setPeriodic(3600000) // The job will be executed each hour
+                .build();
+
+        JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        jobScheduler.schedule(job);
+    }
+
+    private void stopJobScheduler(){
+        JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        jobScheduler.cancel(JOBSCHEDULER_ID);
+    }
 
     // -----------------
     // UPDATE UI
