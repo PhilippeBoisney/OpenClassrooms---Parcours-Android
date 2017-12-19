@@ -8,6 +8,7 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.openclassrooms.freezap.R;
 import com.openclassrooms.freezap.Utils.MyAlarmReceiver;
 import com.openclassrooms.freezap.Utils.MyAsyncTask;
+import com.openclassrooms.freezap.Utils.MyAsyncTaskLeaked;
 import com.openclassrooms.freezap.Utils.MyAsyncTaskLoader;
 import com.openclassrooms.freezap.Utils.MyHandlerThread;
 import com.openclassrooms.freezap.Utils.SyncJobService;
@@ -53,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements MyAsyncTask.Liste
 
         //Configuring The AlarmManager
         this.configureAlarmManager();
+
+        //Start AsyncTask leaked
+        this.startAsyncTaskLeaked();
     }
 
     @Override
@@ -165,6 +170,12 @@ public class MainActivity extends AppCompatActivity implements MyAsyncTask.Liste
 
     @Override
     public void onLoaderReset(Loader<Long> loader) { }
+
+    // -----
+
+    private void startAsyncTaskLeaked(){
+        new MyAsyncTaskLeaked(this.progressBar).execute();
+    }
 
     // ---------------------------------------------
     // SCHEDULE TASK (AlarmManager & JobScheduler)
