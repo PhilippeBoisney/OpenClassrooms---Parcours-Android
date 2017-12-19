@@ -1,0 +1,48 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.openclassrooms.netapp.Controllers.Fragments.MainFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:background="#4B77BE"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/fragment_main_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFF"
+            android:textAlignment="center"
+            android:text="@string/hello_blank_fragment" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E4F1FE"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/fragment_main_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_corner"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:padding="15dip"
+            android:text="GET DATAS FROM GITHUB"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
