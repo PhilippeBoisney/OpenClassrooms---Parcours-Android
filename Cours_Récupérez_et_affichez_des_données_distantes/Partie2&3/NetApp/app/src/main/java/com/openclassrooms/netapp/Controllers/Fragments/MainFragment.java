@@ -4,6 +4,7 @@ package com.openclassrooms.netapp.Controllers.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,19 @@ import com.openclassrooms.netapp.R;
 import com.openclassrooms.netapp.Utils.GithubCalls;
 import com.openclassrooms.netapp.Utils.NetworkAsyncTask;
 
+import org.reactivestreams.Subscriber;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +36,9 @@ public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners
 
     // FOR DESIGN
     @BindView(R.id.fragment_main_textview) TextView textView;
+
+    //FOR DATA
+    private Disposable disposable;
 
     public MainFragment() { }
 
@@ -37,13 +49,75 @@ public class MainFragment extends Fragment implements NetworkAsyncTask.Listeners
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.disposeWhenDestroy();
+    }
+
     // -----------------
     // ACTIONS
     // -----------------
 
     @OnClick(R.id.fragment_main_button)
     public void submit(View view) {
-        this.executeHttpRequestWithRetrofit();
+        this.streamShowString();
+    }
+
+    // ------------------------------
+    //  Reactive X
+    // ------------------------------
+
+    private void streamShowString(){
+        this.disposable = this.getObservable()
+                .map(getFunctionUpperCase())
+                .flatMap(getSecondObservable())
+                .subscribeWith(getSubscriber());
+    }
+
+    private Observable<String> getObservable(){
+        return Observable.just("Cool !");
+    }
+
+    private Function<String, Observable<String>> getSecondObservable(){
+        return new Function<String, Observable<String>>() {
+            @Override
+            public Observable<String> apply(String previousString) throws Exception {
+                return Observable.just(previousString+" I love Openclassrooms !");
+            }
+        };
+    }
+
+    private Function<String, String> getFunctionUpperCase(){
+        return new Function<String, String>() {
+            @Override
+            public String apply(String s) throws Exception {
+                return s.toUpperCase();
+            }
+        };
+    }
+
+    private DisposableObserver<String> getSubscriber(){
+        return new DisposableObserver<String>() {
+            @Override
+            public void onNext(String item) {
+                textView.setText("Observable emits : "+item);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("TAG","On Error"+Log.getStackTraceString(e));
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("TAG","On Complete !!");
+            }
+        };
+    }
+
+    private void disposeWhenDestroy(){
+        if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
     }
 
     // ------------------------------
