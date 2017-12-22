@@ -2,7 +2,10 @@ package com.openclassrooms.netapp.Controllers.Fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +16,9 @@ import com.openclassrooms.netapp.Models.GithubUser;
 import com.openclassrooms.netapp.Models.GithubUserInfo;
 import com.openclassrooms.netapp.R;
 import com.openclassrooms.netapp.Utils.GithubStreams;
+import com.openclassrooms.netapp.Views.GithubUserAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,10 +33,12 @@ import io.reactivex.observers.DisposableObserver;
 public class MainFragment extends Fragment {
 
     // FOR DESIGN
-    @BindView(R.id.fragment_main_textview) TextView textView;
+    @BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
 
     //FOR DATA
     private Disposable disposable;
+    private List<GithubUser> githubUsers;
+    private GithubUserAdapter adapter;
 
     public MainFragment() { }
 
@@ -39,6 +46,8 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         ButterKnife.bind(this, view);
+        this.configureRecyclerView();
+        this.executeHttpRequestWithRetrofit();
         return view;
     }
 
@@ -49,59 +58,35 @@ public class MainFragment extends Fragment {
     }
 
     // -----------------
-    // ACTIONS
+    // CONFIGURATION
     // -----------------
 
-    @OnClick(R.id.fragment_main_button)
-    public void submit(View view) {
-        // 2 - Call the stream
-        this.executeSecondHttpRequestWithRetrofit();
+    private void configureRecyclerView(){
+        this.githubUsers = new ArrayList<>();
+        // Create adapter passing in the sample user data
+        this.adapter = new GithubUserAdapter(this.githubUsers);
+        // Attach the adapter to the recyclerview to populate items
+        this.recyclerView.setAdapter(this.adapter);
+        // Set layout manager to position the items
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     // -------------------
     // HTTP (RxJAVA)
     // -------------------
 
-    // 1 - Execute our Stream
     private void executeHttpRequestWithRetrofit(){
-        this.updateUIWhenStartingHTTPRequest();
         this.disposable = GithubStreams.streamFetchUserFollowing("JakeWharton").subscribeWith(new DisposableObserver<List<GithubUser>>() {
             @Override
             public void onNext(List<GithubUser> users) {
-                Log.e("TAG","On Next");
-                updateUIWithListOfUsers(users);
+                updateUI(users);
             }
 
             @Override
-            public void onError(Throwable e) {
-                Log.e("TAG","On Error"+Log.getStackTraceString(e));
-            }
+            public void onError(Throwable e) { }
 
             @Override
-            public void onComplete() {
-                Log.e("TAG","On Complete !!");
-            }
-        });
-    }
-
-    private void executeSecondHttpRequestWithRetrofit(){
-        this.updateUIWhenStartingHTTPRequest();
-        this.disposable = GithubStreams.streamFetchUserFollowingAndFetchFirstUserInfos("JakeWharton").subscribeWith(new DisposableObserver<GithubUserInfo>() {
-            @Override
-            public void onNext(GithubUserInfo users) {
-                Log.e("TAG","On Next");
-                updateUIWithUserInfo(users);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e("TAG","On Error"+Log.getStackTraceString(e));
-            }
-
-            @Override
-            public void onComplete() {
-                Log.e("TAG","On Complete !!");
-            }
+            public void onComplete() { }
         });
     }
 
@@ -113,23 +98,8 @@ public class MainFragment extends Fragment {
     // UPDATE UI
     // -------------------
 
-    private void updateUIWhenStartingHTTPRequest(){
-        this.textView.setText("Downloading...");
-    }
-
-    private void updateUIWhenStopingHTTPRequest(String response){
-        this.textView.setText(response);
-    }
-
-    private void updateUIWithListOfUsers(List<GithubUser> users){
-        StringBuilder stringBuilder = new StringBuilder();
-        for (GithubUser user : users){
-            stringBuilder.append("-"+user.getLogin()+"\n");
-        }
-        updateUIWhenStopingHTTPRequest(stringBuilder.toString());
-    }
-
-    private void updateUIWithUserInfo(GithubUserInfo userInfo){
-        updateUIWhenStopingHTTPRequest("The first Following of Jake Wharthon is "+userInfo.getName()+" with "+userInfo.getFollowers()+" followers.");
+    private void updateUI(List<GithubUser> users){
+        githubUsers.addAll(users);
+        adapter.notifyDataSetChanged();
     }
 }
