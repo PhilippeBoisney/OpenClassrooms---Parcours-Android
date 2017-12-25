@@ -27,6 +27,12 @@
             android:textSize="22sp"
             android:textStyle="bold"/>
 
+        <ImageButton
+            android:id="@+id/fragment_main_item_delete"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
+            android:background="@android:drawable/ic_delete"/>
+
     </LinearLayout>
 
     <LinearLayout

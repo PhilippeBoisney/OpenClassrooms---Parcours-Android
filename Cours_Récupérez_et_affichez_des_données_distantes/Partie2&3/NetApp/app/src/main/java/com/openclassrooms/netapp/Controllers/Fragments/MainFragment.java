@@ -9,15 +9,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.openclassrooms.netapp.Models.GithubUser;
 import com.openclassrooms.netapp.Models.GithubUserInfo;
 import com.openclassrooms.netapp.R;
 import com.openclassrooms.netapp.Utils.GithubStreams;
+import com.openclassrooms.netapp.Utils.ItemClickSupport;
 import com.openclassrooms.netapp.Views.GithubUserAdapter;
 
 import java.util.ArrayList;
@@ -32,7 +35,7 @@ import io.reactivex.observers.DisposableObserver;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements GithubUserAdapter.Listener {
 
     // FOR DESIGN
     @BindView(R.id.fragment_main_recycler_view) RecyclerView recyclerView;
@@ -51,6 +54,7 @@ public class MainFragment extends Fragment {
         ButterKnife.bind(this, view);
         this.configureRecyclerView();
         this.configureSwipeRefreshLayout();
+        this.configureOnClickRecyclerView();
         this.executeHttpRequestWithRetrofit();
         return view;
     }
@@ -62,13 +66,34 @@ public class MainFragment extends Fragment {
     }
 
     // -----------------
+    // ACTION
+    // -----------------
+
+    private void configureOnClickRecyclerView(){
+        ItemClickSupport.addTo(recyclerView, R.layout.fragment_main_item)
+                .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        GithubUser user = adapter.getUser(position);
+                        Toast.makeText(getContext(), "You clicked on user : "+user.getLogin(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    @Override
+    public void onClickDeleteButton(int position) {
+        GithubUser user = adapter.getUser(position);
+        Toast.makeText(getContext(), "You are trying to delete user : "+user.getLogin(), Toast.LENGTH_SHORT).show();
+    }
+
+    // -----------------
     // CONFIGURATION
     // -----------------
 
     private void configureRecyclerView(){
         this.githubUsers = new ArrayList<>();
         // Create adapter passing in the sample user data
-        this.adapter = new GithubUserAdapter(this.githubUsers, Glide.with(this));
+        this.adapter = new GithubUserAdapter(this.githubUsers, Glide.with(this), this);
         // Attach the adapter to the recyclerview to populate items
         this.recyclerView.setAdapter(this.adapter);
         // Set layout manager to position the items
