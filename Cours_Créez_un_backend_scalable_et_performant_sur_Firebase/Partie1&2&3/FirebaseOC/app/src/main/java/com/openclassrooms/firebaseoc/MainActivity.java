@@ -8,6 +8,6 @@ import com.openclassrooms.firebaseoc.base.BaseActivity;
 public class MainActivity extends BaseActivity {
 
     @Override
-    public int getLayoutContentViewID() { return R.layout.activity_main; }
+    public int getFragmentLayout() { return R.layout.activity_main; }
 
 }
