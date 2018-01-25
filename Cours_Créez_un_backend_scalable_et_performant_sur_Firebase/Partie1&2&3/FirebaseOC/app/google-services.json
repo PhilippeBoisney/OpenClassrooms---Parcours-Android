@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "341160960733",
+    "firebase_url": "https://openclassrooms-test.firebaseio.com",
+    "project_id": "openclassrooms-test",
+    "storage_bucket": "openclassrooms-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:341160960733:android:d7202cce949a3481",
+        "android_client_info": {
+          "package_name": "com.openclassrooms.firebaseoc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "341160960733-hu78memv18jukfeekmscfr47vkfhebi0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.openclassrooms.firebaseoc",
+            "certificate_hash": "1cede99bb1d67119865c3ec20693a66dcbe02268"
+          }
+        },
+        {
+          "client_id": "341160960733-fg5d121fpk2mu0daqkfdrkrh1562vve2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKSTnw879yKJUhtefevF2pKMI4TWCaRV0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "341160960733-fg5d121fpk2mu0daqkfdrkrh1562vve2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
