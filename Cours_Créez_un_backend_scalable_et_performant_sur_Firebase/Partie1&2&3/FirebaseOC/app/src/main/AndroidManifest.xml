@@ -16,6 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- PROFILE ACTIVITY -->
+        <activity android:name=".auth.ProfileActivity"
+            android:label="@string/toolbar_title_login_activity"
+            android:parentActivityName=".MainActivity"/>
+
     </application>
 
 </manifest>

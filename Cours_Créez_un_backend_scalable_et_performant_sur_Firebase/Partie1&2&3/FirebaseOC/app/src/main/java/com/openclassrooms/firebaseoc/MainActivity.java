@@ -5,10 +5,12 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.openclassrooms.firebaseoc.auth.ProfileActivity;
 import com.openclassrooms.firebaseoc.base.BaseActivity;
 
 import java.util.Arrays;
@@ -20,6 +22,7 @@ public class MainActivity extends BaseActivity {
 
     //FOR DESIGN
     @BindView(R.id.main_activity_coordinator_layout) CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.main_activity_button_login) Button buttonLogin;
 
     //FOR DATA
     private static final int RC_SIGN_IN = 123;
@@ -33,13 +36,23 @@ public class MainActivity extends BaseActivity {
         this.handleResponseAfterSignIn(requestCode, resultCode, data);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.updateUIWhenResuming();
+    }
+
     // --------------------
     // ACTIONS
     // --------------------
 
     @OnClick(R.id.main_activity_button_login)
     public void onClickLoginButton() {
-        this.startSignInActivity();
+        if (this.isCurrentUserLogged()){
+            this.startProfileActivity();
+        } else {
+            this.startSignInActivity();
+        }
     }
 
     // --------------------
@@ -61,12 +74,21 @@ public class MainActivity extends BaseActivity {
                 RC_SIGN_IN);
     }
 
+    private void startProfileActivity(){
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
     // --------------------
     // UI
     // --------------------
 
     private void showSnackBar(CoordinatorLayout coordinatorLayout, String message){
         Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_SHORT).show();
+    }
+
+    private void updateUIWhenResuming(){
+        this.buttonLogin.setText(this.isCurrentUserLogged() ? getString(R.string.button_login_text_logged) : getString(R.string.button_login_text_not_logged));
     }
 
     // --------------------
@@ -91,5 +113,4 @@ public class MainActivity extends BaseActivity {
             }
         }
     }
-
 }
