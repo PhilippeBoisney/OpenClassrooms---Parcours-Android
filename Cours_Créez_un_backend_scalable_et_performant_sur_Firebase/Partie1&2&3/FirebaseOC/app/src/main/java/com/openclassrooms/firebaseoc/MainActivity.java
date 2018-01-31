@@ -10,8 +10,10 @@ import android.widget.Button;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.openclassrooms.firebaseoc.api.UserHelper;
 import com.openclassrooms.firebaseoc.auth.ProfileActivity;
 import com.openclassrooms.firebaseoc.base.BaseActivity;
+import com.openclassrooms.firebaseoc.mentor_chat.MentorChatActivity;
 
 import java.util.Arrays;
 
@@ -55,6 +57,31 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @OnClick(R.id.main_activity_button_chat)
+    public void onClickChatButton() {
+        if (this.isCurrentUserLogged()){
+            this.startMentorChatActivity();
+        } else {
+            this.showSnackBar(this.coordinatorLayout, getString(R.string.error_not_connected));
+        }
+    }
+
+    // --------------------
+    // REST REQUEST
+    // --------------------
+
+    private void createUserInFirestore(){
+
+        if (this.getCurrentUser() != null){
+
+            String urlPicture = (this.getCurrentUser().getPhotoUrl() != null) ? this.getCurrentUser().getPhotoUrl().toString() : null;
+            String username = this.getCurrentUser().getDisplayName();
+            String uid = this.getCurrentUser().getUid();
+
+            UserHelper.createUser(uid, username, urlPicture).addOnFailureListener(this.onFailureListener());
+        }
+    }
+
     // --------------------
     // NAVIGATION
     // --------------------
@@ -76,6 +103,11 @@ public class MainActivity extends BaseActivity {
 
     private void startProfileActivity(){
         Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    private void startMentorChatActivity(){
+        Intent intent = new Intent(this, MentorChatActivity.class);
         startActivity(intent);
     }
 
@@ -101,6 +133,7 @@ public class MainActivity extends BaseActivity {
 
         if (requestCode == RC_SIGN_IN) {
             if (resultCode == RESULT_OK) { // SUCCESS
+                this.createUserInFirestore();
                 showSnackBar(this.coordinatorLayout, getString(R.string.connection_succeed));
             } else { // ERRORS
                 if (response == null) {

@@ -22,6 +22,11 @@
             android:label="@string/toolbar_title_login_activity"
             android:parentActivityName=".MainActivity"/>
 
+        <!-- MENTOR CHAT ACTIVITY -->
+        <activity android:name=".mentor_chat.MentorChatActivity"
+            android:label="@string/toolbar_title_mentor_chat_activity"
+            android:parentActivityName=".MainActivity"/>
+
     </application>
 
 </manifest>

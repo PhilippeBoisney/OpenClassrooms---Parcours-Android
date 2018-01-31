@@ -19,8 +19,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.openclassrooms.firebaseoc.R;
+import com.openclassrooms.firebaseoc.api.UserHelper;
 import com.openclassrooms.firebaseoc.base.BaseActivity;
+import com.openclassrooms.firebaseoc.models.User;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,10 +39,12 @@ public class ProfileActivity extends BaseActivity {
     @BindView(R.id.profile_activity_edit_text_username) TextInputEditText textInputEditTextUsername;
     @BindView(R.id.profile_activity_text_view_email) TextView textViewEmail;
     @BindView(R.id.profile_activity_progress_bar) ProgressBar progressBar;
+    @BindView(R.id.profile_activity_check_box_is_mentor) CheckBox checkBoxIsMentor; // 1 - Adding CheckBox Mentor View
 
     //FOR DATA
     private static final int SIGN_OUT_TASK = 10;
     private static final int DELETE_USER_TASK = 20;
+    private static final int UPDATE_USERNAME = 30;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +61,7 @@ public class ProfileActivity extends BaseActivity {
     // --------------------
 
     @OnClick(R.id.profile_activity_button_update)
-    public void onClickUpdateButton() { }
+    public void onClickUpdateButton() { this.updateUsernameInFirebase(); }
 
     @OnClick(R.id.profile_activity_button_sign_out)
     public void onClickSignOutButton() { this.signOutUserFromFirebase(); }
@@ -75,6 +80,9 @@ public class ProfileActivity extends BaseActivity {
             .show();
     }
 
+    @OnClick(R.id.profile_activity_check_box_is_mentor)
+    public void onClickCheckBoxIsMentor() { this.updateUserIsMentor(); }
+
     // --------------------
     // REST REQUESTS
     // --------------------
@@ -87,9 +95,33 @@ public class ProfileActivity extends BaseActivity {
 
     private void deleteUserFromFirebase(){
         if (this.getCurrentUser() != null) {
+
+            //4 - We also delete user from firestore storage
+            UserHelper.deleteUser(this.getCurrentUser().getUid()).addOnFailureListener(this.onFailureListener());
+
             AuthUI.getInstance()
                     .delete(this)
                     .addOnSuccessListener(this, this.updateUIAfterRESTRequestsCompleted(DELETE_USER_TASK));
+        }
+    }
+
+    // 3 - Update User Username
+    private void updateUsernameInFirebase(){
+
+        this.progressBar.setVisibility(View.VISIBLE);
+        String username = this.textInputEditTextUsername.getText().toString();
+
+        if (this.getCurrentUser() != null){
+            if (!username.isEmpty() &&  !username.equals(getString(R.string.info_no_username_found))){
+                UserHelper.updateUsername(username, this.getCurrentUser().getUid()).addOnFailureListener(this.onFailureListener()).addOnSuccessListener(this.updateUIAfterRESTRequestsCompleted(UPDATE_USERNAME));
+            }
+        }
+    }
+
+    // 2 - Update User Mentor (is or not)
+    private void updateUserIsMentor(){
+        if (this.getCurrentUser() != null) {
+            UserHelper.updateIsMentor(this.getCurrentUser().getUid(), this.checkBoxIsMentor.isChecked()).addOnFailureListener(this.onFailureListener());
         }
     }
 
@@ -111,11 +143,20 @@ public class ProfileActivity extends BaseActivity {
 
             //Get email & username from Firebase
             String email = TextUtils.isEmpty(this.getCurrentUser().getEmail()) ? getString(R.string.info_no_email_found) : this.getCurrentUser().getEmail();
-            String username = TextUtils.isEmpty(this.getCurrentUser().getDisplayName()) ? getString(R.string.info_no_username_found) : this.getCurrentUser().getDisplayName();
 
             //Update views with data
-            this.textInputEditTextUsername.setText(username);
             this.textViewEmail.setText(email);
+
+            // 5 - Get additional data from Firestore
+            UserHelper.getUser(this.getCurrentUser().getUid()).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    User currentUser = documentSnapshot.toObject(User.class);
+                    String username = TextUtils.isEmpty(currentUser.getUsername()) ? getString(R.string.info_no_username_found) : currentUser.getUsername();
+                    checkBoxIsMentor.setChecked(currentUser.getIsMentor());
+                    textInputEditTextUsername.setText(username);
+                }
+            });
         }
     }
 
@@ -124,6 +165,9 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 switch (origin){
+                    case UPDATE_USERNAME:
+                        progressBar.setVisibility(View.INVISIBLE);
+                        break;
                     case SIGN_OUT_TASK:
                         finish();
                         break;
