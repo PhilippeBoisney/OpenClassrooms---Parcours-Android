@@ -73,7 +73,12 @@ public class MentorChatActivity extends BaseActivity implements MentorChatAdapte
     // --------------------
 
     @OnClick(R.id.activity_mentor_chat_send_button)
-    public void onClickSendMessage() { }
+    public void onClickSendMessage() {
+        if (!TextUtils.isEmpty(editTextMessage.getText()) && modelCurrentUser != null){
+            MessageHelper.createMessageForChat(editTextMessage.getText().toString(), this.currentChatName, modelCurrentUser).addOnFailureListener(this.onFailureListener());
+            this.editTextMessage.setText("");
+        }
+    }
 
     @OnClick({ R.id.activity_mentor_chat_android_chat_button, R.id.activity_mentor_chat_firebase_chat_button, R.id.activity_mentor_chat_bug_chat_button})
     public void onClickChatButtons(ImageButton imageButton) {

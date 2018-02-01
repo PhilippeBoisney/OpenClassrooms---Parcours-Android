@@ -23,7 +23,9 @@ public class UserHelper {
     // --- CREATE ---
 
     public static Task<Void> createUser(String uid, String username, String urlPicture) {
+        // 1 - Create Obj
         User userToCreate = new User(uid, username, urlPicture);
+
         return UserHelper.getUsersCollection().document(uid).set(userToCreate);
     }
 
