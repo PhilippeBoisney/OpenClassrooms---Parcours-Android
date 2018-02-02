@@ -39,6 +39,7 @@ dependencies {
     implementation "com.google.firebase:firebase-core:11.8.0"
 
     // FirebaseUI
+    implementation 'com.firebaseui:firebase-ui-storage:3.1.3'
     implementation 'com.firebaseui:firebase-ui-auth:3.1.3'
     implementation 'com.firebaseui:firebase-ui-firestore:3.1.3'
 

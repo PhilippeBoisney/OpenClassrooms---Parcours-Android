@@ -26,4 +26,9 @@ public class MessageHelper {
         Message message = new Message(textMessage, userSender);
         return ChatHelper.getChatCollection().document(chat).collection(COLLECTION_NAME).add(message);
     }
+
+    public static Task<DocumentReference> createMessageWithImageForChat(String urlImage, String textMessage, String chat, User userSender){
+        Message message = new Message(textMessage, urlImage, userSender);
+        return ChatHelper.getChatCollection().document(chat).collection(COLLECTION_NAME).add(message);
+    }
 }
