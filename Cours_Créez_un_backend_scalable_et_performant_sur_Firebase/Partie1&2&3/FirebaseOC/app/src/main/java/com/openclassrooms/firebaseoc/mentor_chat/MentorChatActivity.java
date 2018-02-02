@@ -29,10 +29,13 @@ import com.openclassrooms.firebaseoc.base.BaseActivity;
 import com.openclassrooms.firebaseoc.models.Message;
 import com.openclassrooms.firebaseoc.models.User;
 
+import java.util.List;
 import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * Created by Philippe on 31/01/2018.
@@ -50,11 +53,18 @@ public class MentorChatActivity extends BaseActivity implements MentorChatAdapte
     private MentorChatAdapter mentorChatAdapter;
     @Nullable private User modelCurrentUser;
     private String currentChatName;
+    private Uri uriImageSelected;
 
     // STATIC DATA FOR CHAT
     private static final String CHAT_NAME_ANDROID = "android";
     private static final String CHAT_NAME_BUG = "bug";
     private static final String CHAT_NAME_FIREBASE = "firebase";
+
+    // STATIC DATA FOR PICTURE
+    private static final String PERMS = Manifest.permission.READ_EXTERNAL_STORAGE;
+    private static final int RC_IMAGE_PERMS = 100;
+    private static final int RC_CHOOSE_PHOTO = 200;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +77,18 @@ public class MentorChatActivity extends BaseActivity implements MentorChatAdapte
 
     @Override
     public int getFragmentLayout() { return R.layout.activity_mentor_chat; }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        this.handleResponse(requestCode, resultCode, data);
+    }
 
     // --------------------
     // ACTIONS
@@ -96,7 +118,9 @@ public class MentorChatActivity extends BaseActivity implements MentorChatAdapte
     }
 
     @OnClick(R.id.activity_mentor_chat_add_file_button)
-    public void onClickAddFile() { }
+    // 5 - Calling the appropriate method
+    @AfterPermissionGranted(RC_IMAGE_PERMS)
+    public void onClickAddFile() { this.chooseImageFromPhone(); }
 
     // --------------------
     // REST REQUESTS
@@ -109,6 +133,33 @@ public class MentorChatActivity extends BaseActivity implements MentorChatAdapte
                 modelCurrentUser = documentSnapshot.toObject(User.class);
             }
         });
+    }
+
+    // --------------------
+    // FILE MANAGEMENT
+    // --------------------
+
+    private void chooseImageFromPhone(){
+        if (!EasyPermissions.hasPermissions(this, PERMS)) {
+            EasyPermissions.requestPermissions(this, getString(R.string.popup_title_permission_files_access), RC_IMAGE_PERMS, PERMS);
+            return;
+        }
+        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, RC_CHOOSE_PHOTO);
+    }
+
+    private void handleResponse(int requestCode, int resultCode, Intent data){
+        if (requestCode == RC_CHOOSE_PHOTO) {
+            if (resultCode == RESULT_OK) { //SUCCESS
+                this.uriImageSelected = data.getData();
+                Glide.with(this) //SHOWING PREVIEW OF IMAGE
+                        .load(this.uriImageSelected)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(this.imageViewPreview);
+            } else {
+                Toast.makeText(this, getString(R.string.toast_title_no_image_chosen), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     // --------------------

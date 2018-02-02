@@ -44,6 +44,9 @@ dependencies {
 
     // FACEBOOK LOGIN SUPPORT
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    //EASY PERMISSIONS
+    implementation 'pub.devrel:easypermissions:1.1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
