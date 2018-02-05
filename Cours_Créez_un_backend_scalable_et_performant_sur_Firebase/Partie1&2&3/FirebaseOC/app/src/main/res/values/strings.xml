@@ -1,0 +1,46 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">FirebaseOC</string>
+    <string name="main_activity_description">Discute avec tes mentors, tout simplement.</string>
+
+    <string name="login">Connexion</string>
+    <string name="chat_with_mentor">Discute avec un mentor</string>
+
+    <!-- NOTIFICATION SERVICE -->
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="notification_title">"Vous avez reçu une notification"</string>
+
+    <!-- MAIN ACTIVITY -->
+    <string name="error_not_connected">Vous devez vous connecter !</string>
+    <string name="error_authentication_canceled">Authentification annulée&#8230;</string>
+    <string name="error_no_internet">Aucune connexion internet !</string>
+    <string name="error_unknown_error">Une erreur inconnue s\'est produite&#8230;</string>
+    <string name="connection_succeed">Authentification réussie !</string>
+    <string name="button_login_text_logged">Afficher le profil</string>
+    <string name="button_login_text_not_logged">Connexion</string>
+
+    <!-- LOGIN ACTIVITY -->
+    <string name="toolbar_title_login_activity">Votre Profil</string>
+    <string name="text_input_username">Nom d\'utilisateur</string>
+    <string name="text_view_email">Adresse email :</string>
+    <string name="button_update_account">Mettre à jour le nom d\'utilisateur</string>
+    <string name="button_delete_account">Supprimer mon compte</string>
+    <string name="button_sign_out_account">Déconnexion</string>
+    <string name="info_no_email_found">Auncune adresse email</string>
+    <string name="info_no_username_found">Aucun nom d\'utilisateur</string>
+    <string name="popup_message_confirmation_delete_account">Es-tu sûr(e) de vouloir supprimer ton compte ?</string>
+    <string name="popup_message_choice_yes">Oui !</string>
+    <string name="popup_message_choice_no">Non</string>
+    <string name="check_box_is_mentor">Etes-vous un mentor ?</string>
+
+    <!-- MENTOR_CHAT ACTIVITY -->
+    <string name="toolbar_title_mentor_chat_activity">Chats de discussions</string>
+    <string name="text_input_title_mentor_chat_activity">Composer votre message</string>
+    <string name="button_title_mentor_chat_activity">ENVOYER</string>
+    <string name="text_view_mentor_chat_error">Ce fil de discussion ne contient pour le moment aucun message&#8230;</string>
+    <string name="popup_title_permission_files_access">Cette application a besoin de permission pour fonctionner.</string>
+    <string name="toast_title_no_image_chosen">Aucune image choisie&#8230;</string>
+
+    <!-- FACEBOOK PURPOSE -->
+    <string name="facebook_application_id" translatable="false">420763051691337</string>
+    <string name="facebook_login_protocol_scheme" translatable="false" tools:ignore="UnusedResources">fb420763051691337</string>
+</resources>
