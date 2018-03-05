@@ -23,13 +23,13 @@
 
         <!-- TRIP_BOOK ACTIVITY -->
         <activity
-            android:name=".activities.TripBookActivity"
+            android:name=".tripbook.TripBookActivity"
             android:label="@string/title_trip_book"
             android:parentActivityName=".MainActivity" />
 
         <!-- TODOLIST ACTIVITY -->
         <activity
-            android:name=".activities.TodoListActivity"
+            android:name=".todolist.TodoListActivity"
             android:label="@string/title_todo_list"
             android:parentActivityName=".MainActivity"/>
 

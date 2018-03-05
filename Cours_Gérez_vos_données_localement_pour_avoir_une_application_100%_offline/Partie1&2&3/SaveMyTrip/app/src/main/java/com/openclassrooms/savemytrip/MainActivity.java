@@ -3,8 +3,8 @@ package com.openclassrooms.savemytrip;
 import android.content.Intent;
 
 import com.openclassrooms.savemytrip.base.BaseActivity;
-import com.openclassrooms.savemytrip.activities.TodoListActivity;
-import com.openclassrooms.savemytrip.activities.TripBookActivity;
+import com.openclassrooms.savemytrip.todolist.TodoListActivity;
+import com.openclassrooms.savemytrip.tripbook.TripBookActivity;
 
 import butterknife.OnClick;
 

@@ -1,4 +1,4 @@
-package com.openclassrooms.savemytrip.activities;
+package com.openclassrooms.savemytrip.tripbook;
 
 
 import android.os.Bundle;

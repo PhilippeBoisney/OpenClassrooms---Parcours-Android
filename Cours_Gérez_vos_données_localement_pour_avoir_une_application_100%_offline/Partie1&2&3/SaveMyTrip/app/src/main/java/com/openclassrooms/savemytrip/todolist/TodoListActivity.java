@@ -1,4 +1,4 @@
-package com.openclassrooms.savemytrip.activities;
+package com.openclassrooms.savemytrip.todolist;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
