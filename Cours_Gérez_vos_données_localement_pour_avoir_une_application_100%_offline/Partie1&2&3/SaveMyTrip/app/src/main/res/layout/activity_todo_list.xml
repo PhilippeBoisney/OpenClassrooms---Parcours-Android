@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <!-- HEADER -->
+    <LinearLayout
+        android:id="@+id/todo_list_activity_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/todo_list_activity_header_profile_image"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_margin="@dimen/default_margin"/>
+
+        <TextView
+            android:id="@+id/todo_list_activity_header_profile_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:textSize="@dimen/default_title_size"
+            android:layout_margin="@dimen/default_margin"/>
+
+    </LinearLayout>
+
+    <!-- RECYCLER VIEW -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/todo_list_activity_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/todo_list_activity_relative_layout_bottom"
+        android:layout_below="@id/todo_list_activity_header"/>
+
+    <RelativeLayout
+        android:id="@+id/todo_list_activity_relative_layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:layout_above="@id/todo_list_activity_button_add">
+
+        <!-- EDIT TEXT  -->
+        <EditText
+            android:id="@+id/todo_list_activity_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/default_text_size"
+            android:hint="@string/todolist_things_todo"
+            android:layout_toLeftOf="@id/todo_list_activity_spinner"/>
+
+        <!-- SPINNER  -->
+        <Spinner
+            android:id="@+id/todo_list_activity_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/default_text_size"/>
+
+    </RelativeLayout>
+
+    <!-- BUTTON TODOLIST -->
+    <Button
+        android:id="@+id/todo_list_activity_button_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/todolist_button_add"
+        android:textColor="#fff"
+        android:textSize="@dimen/default_text_size"
+        android:background="@drawable/button_radius_accent_color"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_margin="@dimen/default_margin"
+        android:padding="@dimen/default_margin"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

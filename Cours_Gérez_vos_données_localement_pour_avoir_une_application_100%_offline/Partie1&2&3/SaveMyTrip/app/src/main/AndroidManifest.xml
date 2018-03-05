@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.openclassrooms.savemytrip">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- MAIN_ACTIVITY -->
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoTitle"> <!-- DISABLE TOOLBAR & ROTATION -->
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- TRIP_BOOK ACTIVITY -->
+        <activity
+            android:name=".activities.TripBookActivity"
+            android:label="@string/title_trip_book"
+            android:parentActivityName=".MainActivity" />
+
+        <!-- TODOLIST ACTIVITY -->
+        <activity
+            android:name=".activities.TodoListActivity"
+            android:label="@string/title_todo_list"
+            android:parentActivityName=".MainActivity"/>
+
+    </application>
+
+</manifest>
