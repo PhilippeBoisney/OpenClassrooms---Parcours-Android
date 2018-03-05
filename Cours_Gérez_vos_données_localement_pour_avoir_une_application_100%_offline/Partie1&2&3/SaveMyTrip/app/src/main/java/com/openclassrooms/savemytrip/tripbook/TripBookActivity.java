@@ -63,6 +63,17 @@ public class TripBookActivity extends BaseActivity {
                        R.id.trip_book_activity_radio_private, R.id.trip_book_activity_radio_public,
                        R.id.trip_book_activity_radio_normal, R.id.trip_book_activity_radio_volatile})
     public void onClickRadioButton(CompoundButton button, boolean isChecked){
-        /*TODO*/
+        if (isChecked) {
+            switch (button.getId()) {
+                case R.id.trip_book_activity_radio_internal:
+                    this.linearLayoutExternalChoice.setVisibility(View.GONE);
+                    this.linearLayoutInternalChoice.setVisibility(View.VISIBLE);
+                    break;
+                case R.id.trip_book_activity_radio_external:
+                    this.linearLayoutExternalChoice.setVisibility(View.VISIBLE);
+                    this.linearLayoutInternalChoice.setVisibility(View.GONE);
+                    break;
+            }
+        }
     }
 }
