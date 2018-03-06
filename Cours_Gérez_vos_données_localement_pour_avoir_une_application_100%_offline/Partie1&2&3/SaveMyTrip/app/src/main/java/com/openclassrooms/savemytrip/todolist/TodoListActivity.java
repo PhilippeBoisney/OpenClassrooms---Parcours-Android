@@ -13,6 +13,7 @@ import com.openclassrooms.savemytrip.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class TodoListActivity extends BaseActivity {
 
@@ -49,4 +50,6 @@ public class TodoListActivity extends BaseActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
+
+
 }

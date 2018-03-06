@@ -33,4 +33,6 @@ dependencies {
     //GLIDE
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    //EASY PERMISSIONS
+    implementation 'pub.devrel:easypermissions:1.1.1'
 }
