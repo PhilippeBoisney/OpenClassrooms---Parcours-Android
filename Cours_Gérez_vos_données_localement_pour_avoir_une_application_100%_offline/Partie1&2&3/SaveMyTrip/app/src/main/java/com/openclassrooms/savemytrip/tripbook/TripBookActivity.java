@@ -1,7 +1,11 @@
 package com.openclassrooms.savemytrip.tripbook;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.content.FileProvider;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +19,8 @@ import android.widget.Toast;
 import com.openclassrooms.savemytrip.R;
 import com.openclassrooms.savemytrip.base.BaseActivity;
 import com.openclassrooms.savemytrip.utils.StorageUtils;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
@@ -36,6 +42,7 @@ public class TripBookActivity extends BaseActivity {
     // FILE PURPOSE
     private static final String FILENAME = "tripBook.txt";
     private static final String FOLDERNAME = "bookTrip";
+    private static final String AUTHORITY="com.openclassrooms.savemytrip.fileprovider";
 
     // PERMISSION PURPOSE
     private static final int RC_STORAGE_WRITE_PERMS = 100;
@@ -61,7 +68,7 @@ public class TripBookActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_share:
-                /*TODO*/
+                this.shareFile();
                 return true;
             case R.id.action_save:
                 this.save();
@@ -103,7 +110,7 @@ public class TripBookActivity extends BaseActivity {
         if (this.radioButtonExternalChoice.isChecked()){
             this.writeOnExternalStorage(); //Save on external storage
         } else {
-            //TODO: Save on internal storage
+            this.writeOnInternalStorage(); //Save on internal storage
         }
     }
 
@@ -121,18 +128,27 @@ public class TripBookActivity extends BaseActivity {
             return;
         }
 
-        if (StorageUtils.isExternalStorageReadable()){
-            if (this.radioButtonExternalChoice.isChecked()){
+
+        if (this.radioButtonExternalChoice.isChecked()){
+            if (StorageUtils.isExternalStorageReadable()){
                 // EXTERNAL
                 if (radioButtonExternalPublicChoice.isChecked()){
                     // External - Public
-                    this.editText.setText(StorageUtils.getTextFromExternalPublicStorage(this, FILENAME, FOLDERNAME));
+                    this.editText.setText(StorageUtils.getTextFromStorage(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),this, FILENAME, FOLDERNAME));
                 } else {
-                    // External - Private
-                    this.editText.setText(StorageUtils.getTextFromExternalPrivateStorage(this, FILENAME, FOLDERNAME));
+                    // External - Privatex
+                    this.editText.setText(StorageUtils.getTextFromStorage(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), this, FILENAME, FOLDERNAME));
                 }
+            }
+        } else {
+
+            // INTERNAL
+            if (radioButtonInternalVolatileChoice.isChecked()){
+                // Cache
+                this.editText.setText(StorageUtils.getTextFromStorage(getCacheDir(), this, FILENAME, FOLDERNAME));
             } else {
-                // TODO: READ from internal storage
+                // Normal
+                this.editText.setText(StorageUtils.getTextFromStorage(getFilesDir(), this, FILENAME, FOLDERNAME));
             }
         }
     }
@@ -140,12 +156,34 @@ public class TripBookActivity extends BaseActivity {
     private void writeOnExternalStorage(){
         if (StorageUtils.isExternalStorageWritable()){
             if (radioButtonExternalPublicChoice.isChecked()){
-                StorageUtils.writeOnExternalPublicStorage(this, FILENAME, this.editText.getText().toString(), FOLDERNAME);
+                StorageUtils.setTextInStorage(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), this, FILENAME, this.editText.getText().toString(), FOLDERNAME);
             } else {
-                StorageUtils.writeOnExternalPrivateStorage(this, FILENAME, this.editText.getText().toString(), FOLDERNAME);
+                StorageUtils.setTextInStorage(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), this, FILENAME, this.editText.getText().toString(), FOLDERNAME);
             }
         } else {
             Toast.makeText(this, getString(R.string.external_storage_impossible_create_file), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void writeOnInternalStorage(){
+        if (radioButtonInternalVolatileChoice.isChecked()){
+            StorageUtils.setTextInStorage(getCacheDir(), this, FILENAME, this.editText.getText().toString(), FOLDERNAME);
+        } else {
+            StorageUtils.setTextInStorage(getFilesDir(), this, FILENAME, this.editText.getText().toString(), FOLDERNAME);
+        }
+    }
+
+    // ----------------------------------
+    // SHARE FILE
+    // ----------------------------------
+
+    private void shareFile(){
+        File internalFile = StorageUtils.getFileFromStorage(getFilesDir(),this, FILENAME, FOLDERNAME);
+        Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), AUTHORITY, internalFile);
+
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/*");
+        sharingIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+        startActivity(Intent.createChooser(sharingIntent, getString(R.string.trip_book_share)));
     }
 }

@@ -2,6 +2,7 @@ package com.openclassrooms.savemytrip.utils;
 
 import android.content.Context;
 import android.os.Environment;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.openclassrooms.savemytrip.R;
@@ -26,6 +27,20 @@ public class StorageUtils {
         return new File(folder, fileName);
     }
 
+    public static String getTextFromStorage(File rootDestination, Context context, String fileName, String folderName){
+        File file = createOrGetFile(rootDestination, fileName, folderName);
+        return readOnFile(context, file);
+    }
+
+    public static void setTextInStorage(File rootDestination, Context context, String fileName, String folderName, String text){
+        File file = createOrGetFile(rootDestination, fileName, folderName);
+        writeOnFile(context, text, file);
+    }
+
+    public static File getFileFromStorage(File rootDestination, Context context, String fileName, String folderName){
+        return createOrGetFile(rootDestination, fileName, folderName);
+    }
+
     // ----------------------------------
     // EXTERNAL STORAGE
     // ----------------------------------
@@ -38,30 +53,6 @@ public class StorageUtils {
     public static boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
         return (Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state));
-    }
-
-    // ---
-
-    public static void writeOnExternalPublicStorage(Context context, String fileName, String text, String folderName) {
-        File file = createOrGetFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), fileName, folderName);
-        writeOnFile(context, text, file);
-    }
-
-    public static void writeOnExternalPrivateStorage(Context context, String fileName, String text, String folderName) {
-        File file = createOrGetFile(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), fileName, folderName);
-        writeOnFile(context, text, file);
-    }
-
-    // ---
-
-    public static String getTextFromExternalPublicStorage(Context context, String fileName, String folderName){
-        File file = createOrGetFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), fileName, folderName);
-        return readOnFile(context, file);
-    }
-
-    public static String getTextFromExternalPrivateStorage(Context context, String fileName, String folderName){
-        File file = createOrGetFile(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), fileName, folderName);
-        return readOnFile(context, file);
     }
 
     // ----------------------------------
