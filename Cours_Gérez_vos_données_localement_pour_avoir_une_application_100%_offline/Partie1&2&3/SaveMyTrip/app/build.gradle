@@ -35,4 +35,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     //EASY PERMISSIONS
     implementation 'pub.devrel:easypermissions:1.1.1'
+    //ROOM
+    implementation 'android.arch.persistence.room:runtime:1.0.0'
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
 }
