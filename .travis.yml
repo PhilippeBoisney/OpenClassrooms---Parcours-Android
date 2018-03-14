@@ -23,11 +23,11 @@ before_install:
 before_script:
   - cd $TRAVIS_BUILD_DIR/$PATH_TO_PROJECT
   - chmod +x gradlew
-  - .$TRAVIS_BUILD_DIR/$PATH_TO_PROJECT/gradlew build jacocoTestReport assembleAndroidTest
+  - ./gradlew build jacocoTestReport assembleAndroidTest
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-window &
   - android-wait-for-emulator
-  - .$TRAVIS_BUILD_DIR/$PATH_TO_PROJECT/gradlew connectedCheck
+  - ./gradlew connectedCheck
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
