@@ -17,6 +17,7 @@ android:
     - sys-img-armeabi-v7a-$ANDROID_TARGET
 
 before_install:
+  - cd $TRAVIS_BUILD_DIR/$PATH_TO_PROJECT
   - yes | sdkmanager "platforms;android-27"
 
 before_script:
