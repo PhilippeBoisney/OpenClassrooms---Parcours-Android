@@ -26,12 +26,11 @@ licenses:
 
 before_script:
   - chmod +x $PATH_TO_PROJECT/gradlew
-  - cd $PATH_TO_PROJECT
-  - ./gradlew build jacocoTestReport assembleAndroidTest
+  - .$PATH_TO_PROJECT/gradlew build jacocoTestReport assembleAndroidTest
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-window &
   - android-wait-for-emulator
-  - ./gradlew connectedCheck
+  - .$PATH_TO_PROJECT/gradlew connectedCheck
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
