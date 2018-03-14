@@ -20,7 +20,8 @@ before_install:
   - yes | sdkmanager "platforms;android-27"
 
 before_script:
-  - cd $PATH_TO_PROJECT
+  - ls
+  - cd SaveMyTrip
   - chmod +x gradlew
   - ./gradlew build jacocoTestReport assembleAndroidTest
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
