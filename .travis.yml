@@ -18,11 +18,18 @@ android:
 before_install:
   - yes | sdkmanager "platforms;android-27"
 
+licenses:
+    - 'android-sdk-preview-license-52d11cd2'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+
 before_script:
+  - chmod +x gradlew
   - ./gradlew build jacocoTestReport assembleAndroidTest
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-window &
   - android-wait-for-emulator
   - ./gradlew connectedCheck
+  
 after_success:
   - bash <(curl -s https://codecov.io/bash)
