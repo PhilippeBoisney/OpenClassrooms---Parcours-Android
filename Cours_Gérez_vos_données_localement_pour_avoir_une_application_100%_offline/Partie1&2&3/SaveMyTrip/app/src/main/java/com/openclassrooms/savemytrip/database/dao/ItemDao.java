@@ -21,6 +21,9 @@ public interface ItemDao {
     @Query("SELECT * FROM Item WHERE userId = :userId")
     LiveData<List<Item>> getItems(long userId);
 
+    @Query("SELECT * FROM Item WHERE userId = :userId")
+    Cursor getItemsWithCursor(long userId);
+
     @Insert
     long insertItem(Item item);
 

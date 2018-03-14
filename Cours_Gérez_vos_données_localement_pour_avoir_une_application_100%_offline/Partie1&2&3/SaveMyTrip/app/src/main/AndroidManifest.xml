@@ -48,6 +48,12 @@
             android:label="@string/title_todo_list"
             android:parentActivityName=".MainActivity"/>
 
+        <!-- CONTENT PROVIDER -->
+        <provider
+            android:name=".provider.ItemContentProvider"
+            android:authorities="com.openclassrooms.savemytrip.provider"
+            android:exported="true"/>
+
     </application>
 
 </manifest>
