@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity_coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.openclassrooms.savemytrip.MainActivity">
+
+    <!-- MAIN CONTAINER -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- IMAGE VIEW SAVE MY TRIP -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_logo"
+                android:layout_margin="@dimen/default_large_margin"/>
+
+            <!-- TITLE SAVE MY TRIP -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="@dimen/default_title_size"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/default_margin"/>
+
+            <!-- DESCRIPTION SAVE MY TRIP -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/default_text_size"
+                android:textAlignment="center"
+                android:text="@string/main_activity_description"
+                android:layout_margin="@dimen/default_margin"/>
+
+        </LinearLayout>
+
+
+
+        <!-- BUTTONS CONTAINER -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- BUTTON TRIP BOOK -->
+            <Button
+                android:id="@+id/main_activity_button_trip_book"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_trip_book"
+                android:textColor="#fff"
+                android:textSize="@dimen/default_text_size"
+                android:background="@drawable/button_radius_primary_color"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_margin="@dimen/default_margin"
+                android:padding="@dimen/default_large_margin"/>
+
+            <!-- BUTTON TODOLIST -->
+            <Button
+                android:id="@+id/main_activity_button_todo_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_todo_list"
+                android:textColor="#fff"
+                android:textSize="@dimen/default_text_size"
+                android:background="@drawable/button_radius_accent_color"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_margin="@dimen/default_margin"
+                android:padding="@dimen/default_large_margin"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
