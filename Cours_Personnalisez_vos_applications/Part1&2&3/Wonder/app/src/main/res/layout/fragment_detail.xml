@@ -1,10 +1,10 @@
-<LinearLayout
-    android:id="@+id/fragment_detail_root_view"
+<LinearLayout android:id="@+id/fragment_detail_root_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.openclassrooms.wonder.controllers.activities.DetailActivity">
+    tools:context="com.openclassrooms.wonder.controllers.activities.DetailActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,42 +25,44 @@
             android:orientation="vertical"
             android:layout_weight="0.5">
 
-            <TextView
+            <com.openclassrooms.wonder.views.WonderTextView
                 android:id="@+id/fragment_detail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginRight="56dip"
-                style="@style/WonderText.Title"/>
+                style="@style/WonderText.Title"
+                app:fontName="Roboto_Medium"/>
 
-            <TextView
+            <com.openclassrooms.wonder.views.WonderTextView
                 android:id="@+id/fragment_detail_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
                 android:maxLines="3"
                 android:layout_weight="1"
-                android:ellipsize="end"/>
+                android:ellipsize="end"
+                app:fontName="Roboto_Light"/>
 
-            <TextView
+            <com.openclassrooms.wonder.views.WonderTextView
                 android:id="@+id/fragment_detail_views"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:padding="5dip"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                app:fontName="Roboto_Light"/>
 
-            <TextView
+            <com.openclassrooms.wonder.views.WonderTextView
                 android:id="@+id/fragment_detail_likes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                app:fontName="Roboto_Light"/>
 
-            <TextView
+            <com.openclassrooms.wonder.views.WonderTextView
                 android:id="@+id/fragment_detail_comments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                app:fontName="Roboto_Light"/>
 
             <Button
                 android:id="@+id/fragment_detail_share"
@@ -73,6 +75,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

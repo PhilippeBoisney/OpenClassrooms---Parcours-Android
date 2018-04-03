@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Wonder</string>
+
+    <!-- FONT ID -->
+    <string name="Roboto_Bold">Roboto-Bold</string>
+    <string name="Roboto_Medium">Roboto-Medium</string>
+    <string name="Roboto_Light">Roboto-Light</string>
+    <string name="Roboto_Thin">Roboto-Thin</string>
+
 </resources>
