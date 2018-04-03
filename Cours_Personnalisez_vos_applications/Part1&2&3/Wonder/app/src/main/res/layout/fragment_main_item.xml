@@ -4,9 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="2dip"
-    android:layout_marginTop="2dip"
-    android:layout_marginRight="2dip">
+    android:layout_marginLeft="@dimen/margin_small"
+    android:layout_marginTop="@dimen/margin_small"
+    android:layout_marginRight="@dimen/margin_small">
 
     <ImageView
         android:id="@+id/fragment_main_item_image"

@@ -30,7 +30,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginRight="56dip"/>
+                android:layout_marginRight="56dip"
+                style="@style/WonderText.Title"/>
 
             <TextView
                 android:id="@+id/fragment_detail_description"
@@ -53,16 +54,12 @@
                 android:id="@+id/fragment_detail_likes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:padding="5dip"
                 android:layout_weight="1"/>
 
             <TextView
                 android:id="@+id/fragment_detail_comments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:padding="5dip"
                 android:layout_weight="1"/>
 
             <Button

@@ -1,11 +1,43 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <!-- | THEMES | -->
+
+    <!-- Base application theme -->
+    <style name="Wonder" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/WonderText</item>
+        <item name="android:buttonStyle">@style/WonderButton</item>
+    </style>
+
+    <!-- Home Screen Theme -->
+    <style name="Wonder.Home">
+        <item name="android:windowBackground">@color/background_light</item>
+    </style>
+
+    <!-- Detail Screen Theme -->
+    <style name="Wonder.Detail">
+        <item name="android:windowBackground">@color/background_gray</item>
+    </style>
+
+
+    <!-- | STYLES | -->
+
+    <!-- TEXT VIEW -->
+    <style name="WonderText" parent="@style/TextAppearance.AppCompat">
+        <item name="android:padding">@dimen/padding_normal</item>
+        <item name="android:textColor">@color/text_normal_dark</item>
+    </style>
+
+    <style name="WonderText.Title">
+        <item name="android:textSize">@dimen/text_title</item>
+    </style>
+
+    <!-- BUTTON -->
+    <style name="WonderButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:textColor">@color/background_light</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
     </style>
 
 </resources>
