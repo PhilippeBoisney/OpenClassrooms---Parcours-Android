@@ -5,6 +5,7 @@
     <color name="colorPrimary">#333333</color>
     <color name="colorPrimaryDark">#292929</color>
     <color name="colorAccent">#69F0AE</color>
+    <color name="colorAccentDark">#4aa87a</color>
 
     <!-- BACKGROUND -->
     <color name="background_light">#fafafa</color>

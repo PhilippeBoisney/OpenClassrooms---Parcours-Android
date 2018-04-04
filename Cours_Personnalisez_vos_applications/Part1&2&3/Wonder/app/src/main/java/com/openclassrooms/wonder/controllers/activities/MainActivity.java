@@ -15,6 +15,9 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
+    //FOR DESIGN
+    @BindView(R.id.activity_main_bottom_navigation) BottomNavigationView bottomNavigationView;
+
     // FOR DATA
     private MainFragment mainFragment;
 
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         this.configureAndShowMainFragment();
+        this.configureBottomView();
     }
 
     // -------------------
@@ -40,5 +44,28 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.activity_main_frame_layout, mainFragment)
                     .commit();
         }
+    }
+
+    private void configureBottomView(){
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> updateMainFragment(item.getItemId()));
+    }
+
+    // -------------------
+    // UI
+    // -------------------
+
+    private Boolean updateMainFragment(Integer integer){
+        switch (integer) {
+            case R.id.action_android:
+                this.mainFragment.updateDesignWhenUserClickedBottomView(MainFragment.REQUEST_ANDROID);
+                break;
+            case R.id.action_logo:
+                this.mainFragment.updateDesignWhenUserClickedBottomView(MainFragment.REQUEST_LOGO);
+                break;
+            case R.id.action_landscape:
+                this.mainFragment.updateDesignWhenUserClickedBottomView(MainFragment.REQUEST_LANDSCAPE);
+                break;
+        }
+        return true;
     }
 }

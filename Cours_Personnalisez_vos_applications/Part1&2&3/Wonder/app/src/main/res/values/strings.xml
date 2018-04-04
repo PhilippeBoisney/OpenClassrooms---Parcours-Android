@@ -7,4 +7,9 @@
     <string name="Roboto_Light">Roboto-Light</string>
     <string name="Roboto_Thin">Roboto-Thin</string>
 
+    <!-- BOTTOM NAVIGATION VIEW -->
+    <string name="bottom_navigation_menu_landscape">Landscape</string>
+    <string name="bottom_navigation_menu_logos">Logo</string>
+    <string name="bottom_navigation_menu_android">Android</string>
+
 </resources>

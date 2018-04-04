@@ -74,7 +74,7 @@ public class MainFragment extends BaseFragment {
     private void configureRecyclerView(){
         this.projectAdapter = new ProjectAdapter(new ArrayList<>(), Glide.with(this));
         this.recyclerView.setAdapter(this.projectAdapter);
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        this.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         ItemClickSupport.addTo(recyclerView, R.layout.fragment_main_item)
                 .setOnItemClickListener((rv, position, v) -> this.navigateToDetail(this.projectAdapter.getProject(position)));
         this.swipeRefreshLayout.setOnRefreshListener(() -> this.refreshProjects(REQUEST_ANDROID));
@@ -105,8 +105,18 @@ public class MainFragment extends BaseFragment {
     // -------------------
 
     private void updateDesign(ApiResponse projectResponse){
+
         this.swipeRefreshLayout.setRefreshing(false);
+
+        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.layout_animation_fall_down);
+
+        this.recyclerView.setLayoutAnimation(controller);
         this.projectAdapter.update(projectResponse.getProjects());
+        this.recyclerView.scheduleLayoutAnimation();
+    }
+
+    public void updateDesignWhenUserClickedBottomView(String request){
+        this.refreshProjects(request);
     }
 
     // -------------------
