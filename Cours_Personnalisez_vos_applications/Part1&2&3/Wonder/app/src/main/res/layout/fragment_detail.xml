@@ -1,10 +1,11 @@
-<LinearLayout android:id="@+id/fragment_detail_root_view"
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/fragment_detail_root_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.openclassrooms.wonder.controllers.activities.DetailActivity"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context="com.openclassrooms.wonder.controllers.activities.DetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
+            android:transitionName="robot"
             android:scaleType="centerCrop"/>
 
         <LinearLayout
@@ -30,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginRight="56dip"
+                android:layout_marginRight="@dimen/margin_huge"
                 style="@style/WonderText.Title"
                 app:fontName="Roboto_Medium"/>
 
@@ -41,28 +43,9 @@
                 android:maxLines="3"
                 android:layout_weight="1"
                 android:ellipsize="end"
-                app:fontName="Roboto_Light"/>
+                app:fontName="Roboto_Medium"/>
 
-            <com.openclassrooms.wonder.views.WonderTextView
-                android:id="@+id/fragment_detail_views"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:fontName="Roboto_Light"/>
-
-            <com.openclassrooms.wonder.views.WonderTextView
-                android:id="@+id/fragment_detail_likes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:fontName="Roboto_Light"/>
-
-            <com.openclassrooms.wonder.views.WonderTextView
-                android:id="@+id/fragment_detail_comments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:fontName="Roboto_Light"/>
+            <include layout="@layout/social_view"/>
 
             <Button
                 android:id="@+id/fragment_detail_share"
@@ -76,4 +59,16 @@
 
     </LinearLayout>
 
-</LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fragment_detail_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        app:backgroundTint="@color/button_favorite"
+        android:src="@drawable/ic_favorite_border_white_24dp"
+        app:layout_anchor="@id/fragment_detail_image"
+        app:layout_anchorGravity="bottom|right|end"/>
+
+
+</android.support.design.widget.CoordinatorLayout>

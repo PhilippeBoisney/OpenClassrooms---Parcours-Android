@@ -52,10 +52,11 @@ public class DetailFragment extends BaseFragment {
     @BindView(R.id.fragment_detail_image) ImageView imageProject;
     @BindView(R.id.fragment_detail_title) TextView titleProject;
     @BindView(R.id.fragment_detail_description) TextView descriptionProject;
-    @BindView(R.id.fragment_detail_views) TextView viewsProject;
-    @BindView(R.id.fragment_detail_likes) TextView likesProject;
-    @BindView(R.id.fragment_detail_comments) TextView commentsProject;
-    @BindView(R.id.fragment_detail_share) Button shareButton;
+    @BindView(R.id.social_view_views) TextView viewsProject;
+    @BindView(R.id.social_view_likes) TextView likesProject;
+    @BindView(R.id.social_view_comments) TextView commentsProject;
+    @BindView(R.id.fragment_detail_root_view) CoordinatorLayout rootView;
+    @BindView(R.id.fragment_detail_fab) FloatingActionButton fabButton;
 
     @Override
     protected int getLayoutId() { return R.layout.fragment_detail; }
@@ -84,6 +85,11 @@ public class DetailFragment extends BaseFragment {
     @OnClick(R.id.fragment_detail_share)
     public void onClickShareButton(View view) {
         this.showMessage();
+    }
+
+    @OnClick(R.id.social_view_comments_button)
+    public void onClickCommentsButton(View view) {
+        CommentsModalFragment.newInstance(this.currentProject.getId()).show(getActivity().getSupportFragmentManager(), "MODAL");
     }
 
     // -------------------
@@ -116,7 +122,11 @@ public class DetailFragment extends BaseFragment {
     }
 
     private void showMessage(){
-        Toast.makeText(getActivity(), "Fonctionnalité en cours de développement, veuillez patienter !", Toast.LENGTH_LONG).show();
+        Snackbar snackbar = Snackbar.make(rootView, "Fonctionnalité en cours de développement, veuillez patienter !", Snackbar.LENGTH_SHORT);
+        View sbView = snackbar.getView();
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(Color.WHITE);
+        snackbar.show();
     }
 
     // -------------------
