@@ -116,13 +116,13 @@ public class DetailFragment extends BaseFragment {
         this.currentProject = projectResponse.getProject();
         this.titleProject.setText(this.currentProject.getName());
         this.descriptionProject.setText(this.currentProject.getDescription());
-        this.viewsProject.setText(this.currentProject.getStats().getViews()+" views");
-        this.likesProject.setText(this.currentProject.getStats().getAppreciations()+" likes");
-        this.commentsProject.setText(this.currentProject.getStats().getComments()+" comments");
+        this.viewsProject.setText(getString(R.string.detail_fragment_stats_views, this.currentProject.getStats().getViews().toString()));
+        this.likesProject.setText(getString(R.string.detail_fragment_stats_likes, this.currentProject.getStats().getAppreciations().toString()));
+        this.commentsProject.setText(getString(R.string.detail_fragment_stats_comments, this.currentProject.getStats().getComments().toString()));
     }
 
     private void showMessage(){
-        Snackbar snackbar = Snackbar.make(rootView, "Fonctionnalité en cours de développement, veuillez patienter !", Snackbar.LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(rootView, R.string.detail_fragment_snackbar_message, Snackbar.LENGTH_SHORT);
         View sbView = snackbar.getView();
         TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);

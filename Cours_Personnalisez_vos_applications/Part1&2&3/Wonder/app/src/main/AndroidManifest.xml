@@ -25,7 +25,7 @@
         <activity
             android:name="com.openclassrooms.wonder.controllers.activities.DetailActivity"
             android:parentActivityName="com.openclassrooms.wonder.controllers.activities.MainActivity"
-            android:label="Detail"
+            android:label="@string/activity_detail_title"
             android:theme="@style/Wonder.Detail"/>
 
     </application>
