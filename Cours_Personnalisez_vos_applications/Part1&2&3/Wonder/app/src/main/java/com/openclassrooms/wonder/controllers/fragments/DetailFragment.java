@@ -55,6 +55,7 @@ public class DetailFragment extends BaseFragment {
     @BindView(R.id.social_view_views) TextView viewsProject;
     @BindView(R.id.social_view_likes) TextView likesProject;
     @BindView(R.id.social_view_comments) TextView commentsProject;
+    @BindView(R.id.fragment_detail_share) Button shareButton;
     @BindView(R.id.fragment_detail_root_view) CoordinatorLayout rootView;
     @BindView(R.id.fragment_detail_fab) FloatingActionButton fabButton;
 
@@ -110,6 +111,7 @@ public class DetailFragment extends BaseFragment {
 
     private void updateDesignWhenStarting(){
         Glide.with(this).load(this.getImageURLFromBundle()).into(this.imageProject);
+        this.animateViews();
     }
 
     private void updateDesign(ApiResponse projectResponse){
@@ -127,6 +129,50 @@ public class DetailFragment extends BaseFragment {
         TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);
         snackbar.show();
+    }
+
+    private void animateViews(){
+        this.alphaViewAnimation(this.titleProject, 200);
+        this.scaleViewAnimation(this.fabButton, 500);
+        this.alphaViewAnimation(this.descriptionProject, 400);
+        this.alphaViewAnimation(this.viewsProject, 500);
+        this.alphaViewAnimation(this.likesProject, 600);
+        this.alphaViewAnimation(this.commentsProject, 700);
+        this.fromBottomAnimation(this.shareButton, 800);
+    }
+
+
+    private void scaleViewAnimation(View view, int startDelay){
+        // Reset view
+        view.setScaleX(0);
+        view.setScaleY(0);
+        // Animate view
+        view.animate()
+                .scaleX(1f)
+                .scaleY(1f)
+                .setInterpolator(new FastOutSlowInInterpolator())
+                .setStartDelay(startDelay)
+                .setDuration(500)
+                .start();
+    }
+
+    private void alphaViewAnimation(View view, int startDelay){
+        Animation animation = new AlphaAnimation(0.0f, 1.0f);
+        animation.setDuration(1000);
+        animation.setStartOffset(startDelay);
+        view.startAnimation(animation);
+    }
+
+    private void fromBottomAnimation(View view, int startDelay) {
+        Animation animation = new TranslateAnimation(
+                Animation.RELATIVE_TO_PARENT, 0.0f,
+                Animation.RELATIVE_TO_PARENT, 0.0f,
+                Animation.RELATIVE_TO_PARENT, +1.0f,
+                Animation.RELATIVE_TO_PARENT, 0.0f);
+        animation.setDuration(1000);
+        animation.setInterpolator(new AccelerateInterpolator());
+        animation.setStartOffset(startDelay);
+        view.startAnimation(animation);
     }
 
     // -------------------

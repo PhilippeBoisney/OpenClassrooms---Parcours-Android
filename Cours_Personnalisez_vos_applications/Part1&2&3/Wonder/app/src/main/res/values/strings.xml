@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">Wonder</string>
 
+    <!-- ANIMATION -->
+    <string name="animation_main_to_detail" translatable="false">AnimationMainToDetail</string>
+
     <!-- FONT ID -->
     <string name="Roboto_Bold" translatable="false">Roboto-Bold</string>
     <string name="Roboto_Medium" translatable="false">Roboto-Medium</string>

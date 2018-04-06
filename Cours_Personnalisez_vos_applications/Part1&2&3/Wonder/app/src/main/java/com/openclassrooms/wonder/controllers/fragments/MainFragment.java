@@ -76,7 +76,7 @@ public class MainFragment extends BaseFragment {
         this.recyclerView.setAdapter(this.projectAdapter);
         this.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         ItemClickSupport.addTo(recyclerView, R.layout.fragment_main_item)
-                .setOnItemClickListener((rv, position, v) -> this.navigateToDetail(this.projectAdapter.getProject(position)));
+                .setOnItemClickListener((rv, position, v) -> this.navigateToDetail(this.projectAdapter.getProject(position), v));
         this.swipeRefreshLayout.setOnRefreshListener(() -> this.refreshProjects(REQUEST_ANDROID));
     }
 
@@ -123,13 +123,19 @@ public class MainFragment extends BaseFragment {
     // NAVIGATION
     // -------------------
 
-    private void navigateToDetail(Project project){
+    private void navigateToDetail(Project project, View viewClicked){
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putInt(DetailActivity.BUNDLE_KEY_PROJECT_ID, project.getId());
         bundle.putString(DetailActivity.BUNDLE_KEY_PROJECT_IMAGE_URL, project.getCovers().getOriginal());
         intent.putExtras(bundle);
 
-        startActivity(intent);
+        // Animations
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), viewClicked, getString(R.string.animation_main_to_detail));
+            startActivity(intent, options.toBundle());
+        } else {
+            startActivity(intent);
+        }
     }
 }

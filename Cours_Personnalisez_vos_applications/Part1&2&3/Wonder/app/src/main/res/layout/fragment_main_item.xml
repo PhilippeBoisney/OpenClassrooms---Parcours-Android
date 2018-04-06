@@ -15,6 +15,7 @@
         android:id="@+id/fragment_main_item_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:transitionName="@string/animation_main_to_detail"/>
 
 </android.support.v7.widget.CardView>
