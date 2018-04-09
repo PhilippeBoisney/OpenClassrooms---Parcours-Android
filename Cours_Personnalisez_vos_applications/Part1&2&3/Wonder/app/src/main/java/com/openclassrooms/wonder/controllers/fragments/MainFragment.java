@@ -85,6 +85,7 @@ public class MainFragment extends BaseFragment {
     // -------------------
 
     private void getProjects(){
+        this.incrementIdleResource();
         this.disposable = this.projectViewModel.getProjects()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -93,6 +94,7 @@ public class MainFragment extends BaseFragment {
     }
 
     private void refreshProjects(String request){
+        this.incrementIdleResource();
         this.disposable = this.projectViewModel.refreshProjects(request)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -106,6 +108,7 @@ public class MainFragment extends BaseFragment {
 
     private void updateDesign(ApiResponse projectResponse){
 
+        this.decrementIdleResource();
         this.swipeRefreshLayout.setRefreshing(false);
 
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.layout_animation_fall_down);
