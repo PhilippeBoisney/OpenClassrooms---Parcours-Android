@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name" translatable="false">Wonder</string>
+
+    <!-- ANIMATION -->
+    <string name="animation_main_to_detail" translatable="false">AnimationMainToDetail</string>
+
+    <!-- FONT ID -->
+    <string name="Roboto_Bold" translatable="false">Roboto-Bold</string>
+    <string name="Roboto_Medium" translatable="false">Roboto-Medium</string>
+    <string name="Roboto_Light" translatable="false">Roboto-Light</string>
+    <string name="Roboto_Thin" translatable="false">Roboto-Thin</string>
+
+    <!-- BOTTOM NAVIGATION VIEW -->
+    <string name="bottom_navigation_menu_landscape">Landscape</string>
+    <string name="bottom_navigation_menu_logos">Logo</string>
+    <string name="bottom_navigation_menu_android">Android</string>
+
+    <!-- DETAIL SCREEN -->
+    <string name="fragment_detail_button_share">Share</string>
+    <string name="detail_fragment_snackbar_message">This feature is currently not available. Please check back later ...</string>
+    <string name="detail_fragment_stats_views">%1$s views</string>
+    <string name="detail_fragment_stats_likes">%1$s likes</string>
+    <string name="detail_fragment_stats_comments">%1$s comments</string>
+    <string name="activity_detail_title">Detail</string>
+
+</resources>

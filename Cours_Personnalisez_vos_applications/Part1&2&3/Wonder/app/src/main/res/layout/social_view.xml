@@ -1,0 +1,75 @@
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1">
+
+    <!-- Views Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_remove_red_eye_black_24px"/>
+
+        <com.openclassrooms.wonder.views.WonderTextView
+            android:id="@+id/social_view_views"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fontName="Roboto_Light"/>
+
+    </LinearLayout>
+
+    <!-- Likes Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_favorite_black_24px"/>
+
+        <com.openclassrooms.wonder.views.WonderTextView
+            android:id="@+id/social_view_likes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fontName="Roboto_Light"/>
+
+    </LinearLayout>
+
+    <!-- Comments Row -->
+    <LinearLayout
+        android:id="@+id/social_view_comments_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_chat_black_24px"/>
+
+        <com.openclassrooms.wonder.views.WonderTextView
+            android:id="@+id/social_view_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fontName="Roboto_Light"/>
+
+    </LinearLayout>
+
+</LinearLayout>
