@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bottom_navigation_menu_landscape">Paysage</string>
+    <string name="bottom_navigation_menu_logos">Logo</string>
+    <string name="bottom_navigation_menu_android">Android</string>
+    <string name="fragment_detail_button_share">Partager</string>
+    <string name="detail_fragment_snackbar_message">Cette fonctionnalité n\'est pas encore disponible. Merci de réessayer ultérieurement.</string>
+    <string name="detail_fragment_stats_comments">%1$s avis</string>
+    <string name="detail_fragment_stats_views">%1$s vues</string>
+    <string name="detail_fragment_stats_likes">%1$s aimes</string>
+    <string name="activity_detail_title">Détail</string>
+</resources>

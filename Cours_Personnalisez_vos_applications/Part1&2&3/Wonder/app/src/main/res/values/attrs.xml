@@ -1,0 +1,10 @@
+<resources>
+    <declare-styleable name="WonderTextView">
+        <attr name="fontName" format="enum">
+            <enum name="Roboto_Bold" value="1" />
+            <enum name="Roboto_Light" value="2" />
+            <enum name="Roboto_Medium" value="3" />
+            <enum name="Roboto_Thin" value="4" />
+        </attr>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,32 @@
+language: android
+jdk: oraclejdk8
+
+env:
+  global:
+   - ANDROID_API_LEVEL=27
+   - EMULATOR_API_LEVEL=22
+   - ANDROID_BUILD_TOOLS_VERSION=27.0.3
+   - ANDROID_ABI=armeabi-v7a
+   - PATH_TO_PROJECT=Cours_Gerez_vos_donnees_localement_pour_avoir_une_application_100_offline/Partie1_2_3/SaveMyTrip
+   
+android:
+  components:
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - android-$EMULATOR_API_LEVEL
+    - sys-img-armeabi-v7a-android-$EMULATOR_API_LEVEL
+
+before_install:
+  - cd $TRAVIS_BUILD_DIR/$PATH_TO_PROJECT
+  - yes | sdkmanager "platforms;android-27"
+
+before_script:
+  - cd $TRAVIS_BUILD_DIR/$PATH_TO_PROJECT
+  - chmod +x gradlew
+  - ./gradlew build jacocoTestReport assembleAndroidTest
+  - echo no | android create avd --force -n test -t android-$EMULATOR_API_LEVEL --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - ./gradlew connectedCheck
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

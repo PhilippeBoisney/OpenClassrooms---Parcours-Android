@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.openclassrooms.savemytrip.tripbook.TripBookActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Paramètres"
+            android:textSize="@dimen/default_title_size"
+            android:layout_margin="@dimen/default_margin"/>
+
+        <!-- TITLE -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/question_storage_writing"
+            android:textSize="@dimen/default_text_size"
+            android:layout_margin="@dimen/default_margin"/>
+
+        <!-- EXTERNAL OR INTERNAL -->
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/trip_book_activity_radio_external"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/question_storage_writing_external"
+                android:textSize="@dimen/default_text_size"/>
+
+            <RadioButton android:id="@+id/trip_book_activity_radio_internal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/question_storage_writing_internal"
+                android:textSize="@dimen/default_text_size"/>
+        </RadioGroup>
+
+        <!-- EXTERNAL : PUBLIC OR PRIVATE -->
+        <LinearLayout
+            android:id="@+id/trip_book_activity_external_choice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/question_storage_privacy"
+                android:textSize="@dimen/default_text_size"
+                android:layout_margin="@dimen/default_margin"/>
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton android:id="@+id/trip_book_activity_radio_public"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/question_storage_privacy_public"
+                    android:textSize="@dimen/default_text_size"/>
+                <RadioButton android:id="@+id/trip_book_activity_radio_private"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/question_storage_privacy_private"
+                    android:textSize="@dimen/default_text_size"/>
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+        <!-- INTERNAL : NORMAL OR VOLATILE -->
+        <LinearLayout
+            android:id="@+id/trip_book_activity_internal_choice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/question_storage_cache"
+                android:textSize="@dimen/default_text_size"
+                android:layout_margin="@dimen/default_margin"/>
+
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton android:id="@+id/trip_book_activity_radio_volatile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/question_storage_cache_yes"
+                    android:textSize="@dimen/default_text_size"/>
+                <RadioButton android:id="@+id/trip_book_activity_radio_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/question_storage_cache_no"
+                    android:textSize="@dimen/default_text_size"/>
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ton carnet de voyage"
+            android:textSize="@dimen/default_title_size"
+            android:layout_margin="@dimen/default_margin"/>
+
+        <!-- EDIT TEXT -->
+        <EditText
+            android:id="@+id/trip_book_activity_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/default_text_size"
+            android:hint="@string/trip_book_edit_text_placeholder"
+            android:scrollbars="vertical"
+            android:gravity="top"
+            android:inputType="textMultiLine"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

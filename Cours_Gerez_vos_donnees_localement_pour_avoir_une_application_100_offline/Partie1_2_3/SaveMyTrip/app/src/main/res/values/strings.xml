@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">SaveMyTrip</string>
+    <string name="main_activity_description">Organise ton voyage de manière&#8230; totalement déconnectée !</string>
+
+    <!-- COMMON -->
+    <string name="title_trip_book">Carnet de voyage</string>
+    <string name="title_todo_list">Choses à faire</string>
+    <string name="title_permission">Cette application a besoin de permission pour fonctionner</string>
+    <string name="error_happened">Une erreur s\'est produite !</string>
+
+    <!-- TRIP BOOK ACTIVITY -->
+    <string name="saved">Enregistré</string>
+    <string name="external_storage_impossible_create_file">Impossible de créer un fichier sur l\'espace de stockage externe</string>
+
+    <string name="question_storage_writing">Dans quel stockage souhaitez-vous écrire ?</string>
+    <string name="question_storage_writing_external">Externe</string>
+    <string name="question_storage_writing_internal">Interne</string>
+
+    <string name="question_storage_privacy">Quel niveau de confidentialité souhaitez-vous ?</string>
+    <string name="question_storage_privacy_private">Privé</string>
+    <string name="question_storage_privacy_public">Public</string>
+
+    <string name="question_storage_cache">Souhaitez-vous stocker le fichier en cache ?</string>
+    <string name="question_storage_cache_yes">Oui</string>
+    <string name="question_storage_cache_no">Non</string>
+
+    <string name="trip_book_edit_text_placeholder">Commence à écrire ton voyage ici&#8230;</string>
+    <string name="trip_book_button">Enregistrer</string>
+    <string name="trip_book_share">Partager votre carnet sur</string>
+
+    <!-- TODOLIST ACTIVITY -->
+    <string name="todolist_things_todo">Ajouter une chose à faire&#8230;</string>
+    <string name="todolist_button_add">Ajouter</string>
+    <string-array name="category_array">
+        <item>A visiter</item>
+        <item>Idées</item>
+        <item>Restaurants</item>
+    </string-array>
+
+</resources>
