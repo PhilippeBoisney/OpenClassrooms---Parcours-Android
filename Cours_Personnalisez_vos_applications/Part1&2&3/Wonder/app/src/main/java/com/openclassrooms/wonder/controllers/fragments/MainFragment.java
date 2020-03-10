@@ -42,7 +42,7 @@ public class MainFragment extends BaseFragment {
 
     //FOR DATA
     private ProjectViewModel projectViewModel;
-    public static final String REQUEST_ANDROID = "android material design";
+    public static final String REQUEST_ANDROID = "android design";
     public static final String REQUEST_LOGO = "logo";
     public static final String REQUEST_LANDSCAPE = "landscape";
 
