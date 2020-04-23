@@ -1,13 +1,13 @@
 package com.openclassrooms.savemytrip;
 
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.openclassrooms.savemytrip.database.SaveMyTripDatabase;
 import com.openclassrooms.savemytrip.provider.ItemContentProvider;

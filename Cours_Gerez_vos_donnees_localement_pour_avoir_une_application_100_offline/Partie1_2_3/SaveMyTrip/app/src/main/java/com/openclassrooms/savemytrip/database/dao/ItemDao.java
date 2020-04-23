@@ -1,10 +1,10 @@
 package com.openclassrooms.savemytrip.database.dao;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
+import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
 import android.database.Cursor;
 
 import com.openclassrooms.savemytrip.models.Item;
