@@ -1,11 +1,10 @@
 package com.openclassrooms.savemytrip.todolist;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,7 +25,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import pub.devrel.easypermissions.EasyPermissions;
 
 public class TodoListActivity extends BaseActivity implements ItemAdapter.Listener {
 

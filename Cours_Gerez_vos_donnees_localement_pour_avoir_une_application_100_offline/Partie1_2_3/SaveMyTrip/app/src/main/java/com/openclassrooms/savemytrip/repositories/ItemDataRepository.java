@@ -1,6 +1,6 @@
 package com.openclassrooms.savemytrip.repositories;
 
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 
 import com.openclassrooms.savemytrip.database.dao.ItemDao;
 import com.openclassrooms.savemytrip.models.Item;
