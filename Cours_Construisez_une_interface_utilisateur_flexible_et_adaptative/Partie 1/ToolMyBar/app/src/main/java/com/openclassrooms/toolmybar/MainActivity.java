@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     // ----
 
     private void launchDetailActivity(){
-        Intent myIntent = new Intent(MainActivity.this, DetailActivity.class);
-        this.startActivity(myIntent);
+        //code in one line
+        this.startActivity(new Intent(MainActivity.this,DetailActivity.class));
     }
 }
